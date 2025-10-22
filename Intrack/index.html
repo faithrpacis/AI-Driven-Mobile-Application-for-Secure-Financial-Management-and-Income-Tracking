@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InTrack — Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- WELCOME (shown first) -->
+  <section id="welcome" class="screen screen--center" aria-label="Welcome">
+    <div class="welcome-card">
+      <div class="logo-circle">
+        <!-- replace file name if needed -->
+        <img src="intrack-logo.png" alt="InTrack logo" onerror="this.style.display='none'">
+      </div>
+      <h1 class="brand">InTrack</h1>
+      <p class="tagline">Your safe way to stay on track</p>
+      <button id="to-onboarding" class="btn-primary">Tap to Continue</button>
+    </div>
+  </section>
+
+  <!-- ONBOARDING (hidden until tap) -->
+  <section id="onboarding" class="screen screen--center hidden" role="region" aria-label="Onboarding">
+    <div class="ob-shell">
+      <div class="ob-header"></div>
+      <div class="ob-body">
+        <div class="slides">
+          <!-- Slide 1 -->
+          <div class="slide active">
+            <h2>Welcome To Expense Manager</h2>
+            <div class="art" aria-hidden="true">💰</div>
+            <div class="cta">
+              <button class="btn-primary" data-next>Next</button>
+              <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slide">
+            <h2>Are You Ready To Take Control Of Your Finances?</h2>
+            <div class="art" aria-hidden="true">📱</div>
+            <div class="cta">
+              <button class="btn-primary" data-next>Next</button>
+              <div class="dots"><span class="dot active"></span><span class="dot active"></span><span class="dot"></span></div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slide">
+            <h2>Track, Save, and Grow</h2>
+            <div class="art" aria-hidden="true">📈</div>
+            <div class="cta">
+              <button class="btn-primary" id="finish">Continue</button>
+              <div class="dots"><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // welcome → onboarding
+    const welcome = document.getElementById('welcome');
+    const onboarding = document.getElementById('onboarding');
+    document.getElementById('to-onboarding').addEventListener('click', () => {
+      welcome.classList.add('hidden');
+      onboarding.classList.remove('hidden');
+      onboarding.classList.add('fade-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // onboarding slider
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const nextBtns = document.querySelectorAll('[data-next]');
+    let i = 0;
+    function go(n){
+      slides[i].classList.remove('active');
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides[i].classList.add('active');
+    }
+    nextBtns.forEach(b => b.addEventListener('click', () => go(i + 1)));
+    document.getElementById('finish').addEventListener('click', () => {
+  window.location.href = "login.html"; // go to Login page
+});
+  </script>
+</body>
+</html>

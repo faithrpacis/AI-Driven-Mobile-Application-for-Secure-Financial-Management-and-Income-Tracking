@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InTrack — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <section class="screen screen--center">
+    <div class="login-card">
+      <div class="logo-circle">
+        <img src="intrack-logo.png" alt="InTrack Logo" onerror="this.style.display='none'">
+      </div>
+      <h1 class="brand">InTrack</h1>
+      <p class="tagline">Sign in to manage your finances</p>
+      <form id="loginForm" class="form" novalidate>
+        <label><input type="email" id="email" placeholder="Username or Email"></label>
+        <label class="password-field">
+          <input type="password" id="password" placeholder="Password">
+          <span class="eye" aria-hidden="true">👁️</span>
+        </label>
+        <div class="options">
+          <label class="remember"><input type="checkbox"> Remember me</label>
+          <a href="forgot.html" class="forgot">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn-primary">Log In</button>
+        <p class="signup">Don’t have an account? <a href="signup.html">Sign Up</a></p>
+      </form>
+    </div>
+  </section>
+  <script>
+    const eye=document.querySelector('.eye');if(eye){eye.style.cursor='pointer';eye.addEventListener('click',()=>{const i=document.getElementById('password');i.type=i.type==='password'?'text':'password';});}
+    const form=document.getElementById('loginForm');form.addEventListener('submit',(e)=>{e.preventDefault();window.location.href='mpin.html';});
+  </script>
+</body>
+</html>

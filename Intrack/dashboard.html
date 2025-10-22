@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InTrack — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand">
+      <img src="intrack-logo.png" alt="" onerror="this.style.display='none'">
+      <strong>InTrack</strong>
+    </div>
+    <nav class="topnav" id="topnav">
+      <button class="iconpill active" data-page="home" type="button">🏠</button>
+      <button class="iconpill" data-page="insights" type="button">📊</button>
+      <button class="iconpill" data-page="profile" type="button">👤</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- HOME -->
+    <section id="home" class="page show">
+      <header class="hero">
+        <div class="id">
+          <div class="logo"><img src="intrack-logo.png" alt=""></div>
+          <div><h1>Hi, AG Batang Ina</h1><p>Good Day</p></div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><span>Total Balance</span><strong>₱70,783.00</strong><div class="meter"><i style="width:30%"></i></div></div>
+          <div class="kpi"><span>Total Expense</span><strong class="neg">–₱10,187.40</strong><div class="meter"><i class="alt" style="width:20%"></i></div></div>
+          <div class="kpi note"><span>Status</span><strong>Looks Good</strong><p>30% of your expenses</p></div>
+        </div>
+      </header>
+
+      <section class="triples">
+        <article class="mini grad"><div class="icon">🚗</div><div><p class="muted">Goal</p><h3>Trip to Barcelona</h3></div></article>
+        <article class="mini grad"><div class="icon">💼</div><div><p class="muted">Income</p><h3>₱40,000.00</h3></div></article>
+        <article class="mini grad"><div class="icon">⚡</div><div><p class="muted">Need to Pay</p><h3>Meralco — ₱8,000.00</h3></div></article>
+      </section>
+
+      <section class="main">
+        <aside class="sidebar" id="sidebar">
+          <button class="sidepill active" data-tab="history" type="button">History</button>
+          <button class="sidepill" data-tab="add" type="button">Add Expenses</button>
+          <button class="sidepill" data-tab="budget" type="button">Budget</button>
+        </aside>
+
+        <div class="panels">
+          <!-- History -->
+          <div id="history" class="panel show">
+            <div class="list">
+              <div class="row"><div class="l"><div class="i">💰</div><div><strong>Income</strong><p>Apr 27 — Apr 30</p></div></div><div class="r pos">₱40,000.00</div></div>
+              <div class="row"><div class="l"><div class="i">🛒</div><div><strong>Groceries</strong><p>Apr 20 — Apr 24</p></div></div><div class="r neg">–₱10,000.00</div></div>
+              <div class="row"><div class="l"><div class="i">🚕</div><div><strong>Transport</strong><p>Apr 15 — Apr 23</p></div></div><div class="r pos">+₱6,740.40</div></div>
+            </div>
+          </div>
+
+          <!-- Add Expense -->
+          <div id="add" class="panel">
+            <form id="expenseForm" class="form" novalidate>
+              <label class="fld"><span>Category</span>
+                <select id="exCat">
+                  <option>Groceries</option><option>Transport</option><option>Rent</option>
+                </select>
+              </label>
+              <label class="fld"><span>Amount</span><input id="exAmt" type="number" placeholder="0.00"></label>
+              <label class="fld"><span>Note</span><input id="exNote" type="text" placeholder="Optional note"></label>
+              <label class="fld"><span>Add New Category</span><input id="newCat" type="text" placeholder="e.g. Food, House"></label>
+              <button class="btn" id="addCatBtn" type="button">Add Category</button>
+              <button class="btn" type="submit">Add Expense</button>
+            </form>
+          </div>
+
+          <!-- Budget -->
+          <div id="budget" class="panel">
+            <div class="bar-head"><h3>Monthly Budget</h3><button class="pill" id="openBudget">Add Budget</button></div>
+            <div class="budget-list">
+              <div class="brow"><div class="bl"><div class="bi">🛒</div><div><strong>Groceries</strong><div class="track"><div class="fill" style="width:75%"></div></div><small>3,750 of 5,000</small></div></div></div>
+              <div class="brow"><div class="bl"><div class="bi">🚌</div><div><strong>Transport</strong><div class="track"><div class="fill alt" style="width:35%"></div></div><small>1,750 of 5,000</small></div></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section id="insights" class="page">
+      <div class="ins-inner">
+        <h3>Spending Trend Analysis</h3>
+        <div class="tile big"><canvas id="spendChart" height="120"></canvas></div>
+
+        <div class="tile insight">
+          <h4>💡 Key Insight</h4>
+          <p>Your average monthly expense has <strong>increased by 5.2%</strong> over the last quarter, mainly due to <strong>higher Grocery costs</strong>.</p>
+        </div>
+
+        <div class="tile goal">
+          <h4>🎯 Personalized Goal Suggestion</h4>
+          <p>Based on your pace for <strong>Trip to Barcelona</strong> (Target: ₱20,000.00), you'll reach your goal in <strong>≈ 8 months</strong>.</p>
+        </div>
+      </div>
+      
+<!-- Chatbot Button -->
+<button class="chatbtn" id="chatToggle">💬</button>
+
+<!-- Chatbot Sidebar -->
+<aside class="chatbox" id="chatBox">
+  <header>
+    <h4>InTrack Assistant</h4>
+    <button id="closeChat">✕</button>
+  </header>
+
+  <div class="chat-body" id="chatBody">
+    <div class="bot-intro">
+      <p><strong>💬 Welcome to InTrack Assistant!</strong></p>
+      <p>Tap a question below to learn more about InTrack and its features.</p>
+    </div>
+
+  </div>
+</aside>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+      <div class="tile big"><h3>Profile Settings</h3>
+        <form class="form"><label class="fld"><span>Full Name</span><input type="text" value="AG Batang Ina"></label>
+          <label class="fld"><span>Email</span><input type="email" value="agb@example.com"></label>
+          <button class="btn" type="button">Save Changes</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Budget Modal -->
+  <div class="modal" id="budgetModal">
+    <div class="modal-content">
+      <h3>Add New Budget</h3>
+      <label class="fld"><span>Category</span><input id="budgetCat" type="text" placeholder="e.g. Food"></label>
+      <label class="fld"><span>Limit (₱)</span><input id="budgetLimit" type="number" placeholder="5000"></label>
+      <label class="fld"><span>Emoji</span><input id="budgetEmoji" type="text" placeholder="🛒"></label>
+      <div class="modal-actions">
+        <button class="btn" id="saveBudget">Save</button>
+        <button class="pill" id="closeBudget">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // PAGE SWITCH
+    const topnav=document.getElementById('topnav');
+    const pages=document.querySelectorAll('.page');
+    topnav.addEventListener('click',e=>{
+      const btn=e.target.closest('.iconpill');
+      if(!btn)return;
+      topnav.querySelectorAll('.iconpill').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      pages.forEach(p=>p.classList.remove('show'));
+      document.getElementById(btn.dataset.page).classList.add('show');
+    });
+
+    const sidebar=document.getElementById('sidebar');
+    sidebar.addEventListener('click',e=>{
+      const btn=e.target.closest('.sidepill');
+      if(!btn)return;
+      sidebar.querySelectorAll('.sidepill').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('show'));
+      document.getElementById(btn.dataset.tab).classList.add('show');
+    });
+
+    // ADD CATEGORY
+    document.getElementById('addCatBtn').onclick=()=>{
+      const newCat=document.getElementById('newCat').value.trim();
+      if(!newCat)return alert('Enter category');
+      const sel=document.getElementById('exCat');
+      const opt=document.createElement('option');
+      opt.textContent=newCat;
+      sel.append(opt);
+      document.getElementById('newCat').value='';
+      alert('Category added!');
+    };
+
+    // ADD BUDGET MODAL
+    const openBudget=document.getElementById('openBudget');
+    const budgetModal=document.getElementById('budgetModal');
+    const closeBudget=document.getElementById('closeBudget');
+    const saveBudget=document.getElementById('saveBudget');
+    openBudget.onclick=()=>budgetModal.classList.add('show');
+    closeBudget.onclick=()=>budgetModal.classList.remove('show');
+    saveBudget.onclick=()=>{
+      const cat=document.getElementById('budgetCat').value;
+      const lim=document.getElementById('budgetLimit').value;
+      const emo=document.getElementById('budgetEmoji').value||'💵';
+      if(!cat||!lim)return alert('Fill all fields');
+      const div=document.createElement('div');
+      div.className='brow';
+      div.innerHTML=`<div class="bl"><div class="bi">${emo}</div><div><strong>${cat}</strong>
+        <div class="track"><div class="fill" style="width:0%"></div></div><small>0 of ${lim}</small></div></div>`;
+      document.querySelector('.budget-list').append(div);
+      budgetModal.classList.remove('show');
+    };
+
+    // CHART
+    const ctx=document.getElementById('spendChart');
+    new Chart(ctx,{
+      type:'line',
+      data:{
+        labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets:[{
+          label:'Monthly Spending',
+          data:[5000,6500,8000,9500,10000,11000,11500,12000,13000,14000,14500,15000],
+          tension:.35,
+          fill:true,
+          backgroundColor:'rgba(31,167,115,.18)',
+          borderColor:'#1FA773',
+          pointRadius:3
+        }]
+      },
+      options:{
+        plugins:{legend:{display:false}},
+        scales:{
+          y:{beginAtZero:true,grid:{color:'#e6f6ef'}},
+          x:{grid:{display:false}}
+        }
+      }
+    });
+
+    // CHATBOT
+    const chatToggle=document.getElementById('chatToggle');
+    const chatBox=document.getElementById('chatBox');
+    const closeChat=document.getElementById('closeChat');
+    chatToggle.onclick=()=>chatBox.classList.add('show');
+    closeChat.onclick=()=>chatBox.classList.remove('show');
+  </script>
+</body>
+</html>
